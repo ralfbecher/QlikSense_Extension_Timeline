@@ -1,0 +1,193 @@
+.tooltip
+{
+    font-size: 12px;
+    text-anchor: start;
+}
+
+.tooltip_bg
+{
+    fill: #eeeeee;
+    stroke: #999999;
+    stroke-width: 1;
+    opacity: 0.85;
+}
+
+/* alternating column backgrounds */
+.vis-time-axis .vis-grid.vis-odd {
+  background: #f5f5f5;
+}
+
+/* overflow if content exceeds range */
+.vis-item .vis-item-overflow {
+  overflow: visible;
+}
+
+/* gray background in weekends, white text color */
+.vis-time-axis .vis-grid.vis-saturday,
+.vis-time-axis .vis-grid.vis-sunday {
+  background: lightgray;
+}
+.vis-time-axis .vis-text.vis-saturday,
+.vis-time-axis .vis-text.vis-sunday {
+  color: white;
+}
+
+.vis-item.color-a {
+  background-color: #3C52A1;
+  border-color: #304281;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-b {
+  background-color: #3A82C4;
+  border-color: #2E689D;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-c {
+  background-color: #69ACDE;
+  border-color: #548AB2;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-d {
+  background-color: #9FD0F1;
+  border-color: #7FA6C1;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-e {
+  background-color: #CFEAFA;
+  border-color: #A6BBC8;
+  color: #A07E66;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-f {
+  background-color: #EEDCC5;
+  border-color: #BEB09E;
+  color: #A07E66;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-g {
+  background-color: #F4AA73;
+  border-color: #C3885C;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-h {
+  background-color: #E67A56;
+  border-color: #B86245;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-i {
+  background-color: #CD473E;
+  border-color: #A43932;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-j {
+  background-color: #AE1C3E;
+  border-color: #8B1632;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.vis-item.color-bg-a {
+  background-color: #3C52A1;
+  border-color: #304281;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-b {
+  background-color: #3A82C4;
+  border-color: #2E689D;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-c {
+  background-color: #69ACDE;
+  border-color: #548AB2;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-d {
+  background-color: #9FD0F1;
+  border-color: #7FA6C1;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-e {
+  background-color: #CFEAFA;
+  border-color: #A6BBC8;
+  color: #A07E66;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-f {
+  background-color: #EEDCC5;
+  border-color: #BEB09E;
+  color: #A07E66;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-g {
+  background-color: #F4AA73;
+  border-color: #C3885C;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-h {
+  background-color: #E67A56;
+  border-color: #B86245;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-i {
+  background-color: #CD473E;
+  border-color: #A43932;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}
+
+.vis-item.color-bg-j {
+  background-color: #AE1C3E;
+  border-color: #8B1632;
+  color: white;
+  font-family: "QlikView Sans", sans-serif;
+  opacity: 0.5;
+}

@@ -1,0 +1,9 @@
+{
+	"name" : "Timeline",
+	"description" : "Extension implementing Vis.js Timeline",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "0.2",
+	"preview" : "Timeline.png",
+	"author": "Ralf Becher, irregular.bi"
+}
