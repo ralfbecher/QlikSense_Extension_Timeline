@@ -217,7 +217,7 @@ function($, qlik, moments, vis) {
 					var dataItem = {
 								id: e[0].qElemNumber,
 								content: e[1].qText,
-								start: dateFromQlikNumberToISOString10(e[2].qNum)
+								start: dateFromQlikNumber(e[2].qNum)
 							};
 					if (isTextCellNotEmpty(e[4])) {
 						// optional type set
@@ -225,7 +225,7 @@ function($, qlik, moments, vis) {
 					}
 					if (isTextCellNotEmpty(e[3]) && e[3].qNum) {
 						// optiona end date set
-						dataItem.end = dateFromQlikNumberToISOString10(e[3].qNum);
+						dataItem.end = dateFromQlikNumber(e[3].qNum);
 					}
 					if (e.length > 5) {
 						// optional measures set
