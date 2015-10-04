@@ -183,7 +183,7 @@ function($, qlik, moments, vis) {
 				if (layout.qHyperCube.qMeasureInfo.length > 2) {
 					// create groups
 					$.each(qData.qMatrix, function(i, e) {
-						if (e[7].qText != '-') {
+						if (e[7].qText && e[7].qText.trim() != '' && e[7].qText != '-') {
 							if($.inArray(e[7].qText, groupNames) == -1) {
 								groupNames.push(e[7].qText);
 							}
@@ -209,20 +209,32 @@ function($, qlik, moments, vis) {
 						}
 						useGroups = true;
 					}
-				}					
-
+				}	
+//console.log(qData.qMatrix);				
+//console.log(groupNames);
 				var dataSet = qData.qMatrix.map(function(e){
+					// minimum dimensions needed: id, conten, start date
 					var dataItem = {
 								id: e[0].qElemNumber,
 								content: e[1].qText,
-								start: dateFromQlikNumber(e[2].qNum).toISOString().slice(0,10),
-								type: (e[4].dIsEmpty || e[4].qText == '-' ? "box" : e[4].qText)
+								start: dateFromQlikNumberToISOString10(e[2].qNum)
 							};
-					if (!(e[3].qIsEmpty || e[3].qText == '-')) {
-						dataItem.end = dateFromQlikNumber(e[3].qNum).toISOString().slice(0,10);
+					if (isTextCellNotEmpty(e[4])) {
+						// optional type set
+						dataItem.type = e[4].qText;
+					}
+					if (isTextCellNotEmpty(e[3]) && e[3].qNum) {
+						// optiona end date set
+						dataItem.end = dateFromQlikNumberToISOString10(e[3].qNum);
 					}
 					if (e.length > 5) {
-						dataItem.title = e[5].qText;
+						// optional measures set
+						if (e[5].qText) {
+							// title set
+							dataItem.title = e[5].qText;
+						} else {
+							dataItem.title = "-";						
+						}
 						if (e.length > 6) {
 							if (e[6].qNum) {
 								if (layout.reverseColor) {
@@ -246,14 +258,15 @@ function($, qlik, moments, vis) {
 								dataItem.className =  e[6].qText;
 							}
 							if (useGroups && e.length > 7) {
-								if (!(e[7].qIsEmpty || e[7].qText == '-')) {
-									dataItem.group = $.inArray(e[7].qText, groupNames);
+								if (isTextCellNotEmpty(e[7])) {
+									var pos = $.inArray(e[7].qText, groupNames);
+									if (pos >= 0) dataItem.group = pos;
 								}
 							}							
 						}
 					} else {
-						dataItem.title = e[2].qText							
-					}							
+						dataItem.title = dateFromQlikNumber(e[2].qNum);						
+					}					
 					return dataItem;
 				});
 //console.log(dataSet);
@@ -287,9 +300,19 @@ function($, qlik, moments, vis) {
 	}
 });
 
+function isTextCellNotEmpty(c) {
+	return (c.qText && !(c.qIsNull || c.qText.trim() == ''));
+}
+	
 function dateFromQlikNumber(n) {
+	// return: Date from QlikView number
 	var d = new Date((n - 25569)*86400*1000);
 	// since date was created in UTC shift it to the local timezone
 	d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000 );
 	return d;
+}
+
+function dateFromQlikNumberToISOString10(n) {
+	// return: date string in format YYYY-MM-DD
+	return dateFromQlikNumber(n).toISOString().slice(0,10)
 }
