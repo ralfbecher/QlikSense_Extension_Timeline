@@ -71,6 +71,14 @@ function($, qlik, moments, vis) {
 				sorting: {
 					uses: "sorting"
 				},
+				addons: { 
+					uses: "addons",
+					items: {
+						dataHandling: {
+							uses: "dataHandling"
+						}
+					}
+				}, 
 				settings: {
 					uses: "settings",
 					items: {
