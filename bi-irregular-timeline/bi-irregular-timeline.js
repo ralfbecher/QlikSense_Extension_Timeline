@@ -9,26 +9,8 @@ var _extName = "bi-irregular-timeline";
 var _extPath = "extensions/" + _extName + "/";
 var _extPathStyles = "/" + _extPath + "styles/";
 
-define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized"], 
+define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"], 
 function($, qlik, moments, vis) {
-	var cssFiles = [
-			["vis","vis.min.css"],
-			["st","style.css"]
-		]
-
-	// link css files in head
-	$.each(cssFiles, function(index, value) {
-		var idPattern = 'styleLinked_' + value[0];  
-		if($('#' + idPattern).length === 0) {  
-			var lnk = $('<link />').attr({
-				id: idPattern,
-				rel: "stylesheet", 
-				href: _extPathStyles + value[1]
-			}); 
-			$("head").append(lnk);  
-		}
-	});
-	
 	return {
 		initialProperties: {
 			version: 0.2,
@@ -132,6 +114,30 @@ function($, qlik, moments, vis) {
 								],
 								defaultValue: "en-gb"		
 						},
+						markWeekend: {
+							ref: "markWeekend",
+							type: "boolean",
+							component: "switch",
+							label: "Mark Weekend (F5 needed)",
+							options: [{
+								value: true,
+								label: "On"
+							}, {
+								value: false,
+								label: "Off"
+							}],
+							defaultValue: true
+						},		
+						weekendDays: {
+							ref: "weekendDays",
+							type: "string",
+							component: "dropdown",
+							label: "Weekend Days (F5 needed)",
+							options: 
+								[ { value: 'satsun', label: 'Saturday-Sunday' }, { value: 'sun', label: 'Sunday' }, { value: 'frisat', label: 'Friday-Saturday' }, { value: 'fri', label: 'Friday' }
+								],
+							defaultValue: "satsun"
+						},
 						reverseColor: {
 							ref: "reverseColor",
 							type: "boolean",
@@ -169,6 +175,26 @@ function($, qlik, moments, vis) {
 		},
 
 		paint: function ( $element, layout ) {
+			
+			if (layout.markWeekend) {
+				var cssFiles = [
+						["stwe","style.weekend." + layout.weekendDays + ".css"]
+					]
+
+				// link css files in head
+				$.each(cssFiles, function(index, value) {
+					var idPattern = 'styleLinked_' + value[0];  
+					if($('#' + idPattern).length === 0) {  
+						var lnk = $('<link />').attr({
+							id: idPattern,
+							rel: "stylesheet", 
+							href: _extPathStyles + value[1]
+						}); 
+						$("head").append(lnk);  
+					}
+				});
+			}
+			
 			var _this = this,
 				app = qlik.currApp();
 				qData = layout.qHyperCube.qDataPages[0],

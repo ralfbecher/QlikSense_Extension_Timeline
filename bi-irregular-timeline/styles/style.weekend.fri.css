@@ -1,0 +1,8 @@
+/* gray background in weekends, white text color */
+.vis-time-axis .vis-grid.vis-friday {
+  background: lightgray;
+}
+
+.vis-time-axis .vis-text.vis-friday {
+  color: white;
+}

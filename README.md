@@ -5,7 +5,9 @@ This extension implements vis.js timeline http://visjs.org/docs/timeline/. It is
 
 ![QlikSense Extension Timeline](Timeline.gif)
 
-![QlikSense Extension Timeline](Screenshot2.PNG)
+Now with proper localization and adjustable weekend:
+
+![QlikSense Extension Timeline](Screenshot2.gif)
 
 Dimensions:
 ----------------------
@@ -27,5 +29,9 @@ Additional Properties:
 2. Item orientation : top, bottom (default)
 3. Group Sorting    : Ascending, Descending
 4. Localization     : choose local for localized date and timestamp formatting (default: en-gb)
-5. Reverse Color    : reverse Qlik Sense diverging color (red-to-blue)
-6. Apply CSS for Background : apply CSS class to background items (default: true)
+5. Mark Weekend     : apply CSS class for background color of weekend (when zoomed-in), press F5 after change and save (default:true)
+6. Weekend Days     : choose local weekend days (default: Saturday-Sunday), press F5 after change and save
+7. Reverse Color    : reverse Qlik Sense diverging color (red-to-blue)
+8. Apply CSS for Background : apply CSS class to background items (default: true)
+
+![QlikSense Extension Timeline](Screenshot3.PNG)
