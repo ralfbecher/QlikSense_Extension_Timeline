@@ -7,7 +7,7 @@ This extension implements vis.js timeline http://visjs.org/docs/timeline/. It is
 
 Now with proper localization and adjustable weekend:
 
-![QlikSense Extension Timeline](Screenshot2.gif)
+![QlikSense Extension Timeline](Screenshot2.PNG)
 
 Dimensions:
 ----------------------
