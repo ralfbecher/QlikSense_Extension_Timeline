@@ -3,11 +3,13 @@
   background: #f5f5f5;
 }
 
-/* overflow if content exceeds range */
+/* overflow if content exceeds range
+   now switched by extension property
 .vis-item .vis-item-overflow {
   overflow: visible;
 }
-
+*/
+  
 .vis-item.color-a {
   background-color: #3C52A1;
   border-color: #304281;

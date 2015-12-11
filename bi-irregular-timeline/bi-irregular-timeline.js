@@ -9,7 +9,7 @@ var _extName = "bi-irregular-timeline";
 var _extPath = "extensions/" + _extName + "/";
 var _extPathStyles = "/" + _extPath + "styles/";
 
-define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"], 
+define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "./scripts/jss.min", "css!./styles/vis.min.css", "css!./styles/style.css"], 
 function($, qlik, moments, vis) {
 	return {
 		initialProperties: {
@@ -152,6 +152,20 @@ function($, qlik, moments, vis) {
 							}],
 							defaultValue: false
 						},		
+						itemOverflow: {
+							ref: "itemOverflow",
+							type: "boolean",
+							component: "switch",
+							label: "Title Text Overflow",
+							options: [{
+								value: true,
+								label: "On"
+							}, {
+								value: false,
+								label: "Off"
+							}],
+							defaultValue: false
+						},					
 						backgroundCss: {
 							ref: "backgroundCss",
 							type: "boolean",
@@ -176,7 +190,17 @@ function($, qlik, moments, vis) {
 
 		paint: function ( $element, layout ) {
 			
-			if (layout.markWeekend) {
+		if (layout.itemOverflow) {
+			$("<style>")
+				.prop("type", "text/css")
+				.html("\
+				.vis-item .vis-item-overflow {\
+					overflow: visible;\
+				}")
+				.appendTo("head");
+		}
+		
+		if (layout.markWeekend) {
 				var cssFiles = [
 						["stwe","style.weekend." + layout.weekendDays + ".css"]
 					]
