@@ -179,7 +179,13 @@ function($, qlik, moments, vis) {
 								label: "Off"
 							}],
 							defaultValue: true
-						}					
+						},			
+						maxItems:{
+							ref: "maxItems",
+							type: "integer",
+							label: "max. Items to render",
+							defaultValue: 500
+						}
 					}	
 				}
 			}
@@ -190,17 +196,17 @@ function($, qlik, moments, vis) {
 
 		paint: function ( $element, layout ) {
 			
-		if (layout.itemOverflow) {
-			$("<style>")
-				.prop("type", "text/css")
-				.html("\
-				.vis-item .vis-item-overflow {\
-					overflow: visible;\
-				}")
-				.appendTo("head");
-		}
-		
-		if (layout.markWeekend) {
+			if (layout.itemOverflow) {
+				$("<style>")
+					.prop("type", "text/css")
+					.html("\
+					.vis-item .vis-item-overflow {\
+						overflow: visible;\
+					}")
+					.appendTo("head");
+			}
+			
+			if (layout.markWeekend) {
 				var cssFiles = [
 						["stwe","style.weekend." + layout.weekendDays + ".css"]
 					]
@@ -270,20 +276,27 @@ function($, qlik, moments, vis) {
 				}	
 //console.log(qData.qMatrix);				
 //console.log(groupNames);
-				var dataSet = qData.qMatrix.map(function(e){
-					// minimum dimensions needed: id, conten, start date
+				var _qMatrix = qData.qMatrix;
+				if (_qMatrix.length > layout.maxItems) {
+					var _qMatrix = _qMatrix.slice(0,layout.maxItems);
+				}
+				
+				var dataSet = _qMatrix.map(function(e){
+					// minimum dimensions needed: id, content, start date
 					var dataItem = {
 								id: e[0].qElemNumber,
 								content: e[1].qText,
 								start: dateFromQlikNumber(e[2].qNum)
 							};
+					if (isTextCellNotEmpty(e[3]) && e[3].qNum) {
+						// optional end date set
+						dataItem.end = dateFromQlikNumber(e[3].qNum);
+					}
 					if (isTextCellNotEmpty(e[4])) {
 						// optional type set
-						dataItem.type = e[4].qText;
-					}
-					if (isTextCellNotEmpty(e[3]) && e[3].qNum) {
-						// optiona end date set
-						dataItem.end = dateFromQlikNumber(e[3].qNum);
+						if ((e[4].qText == "background" && dataItem.end) || e[4].qText == "point"){
+							dataItem.type = e[4].qText;
+						}
 					}
 					if (e.length > 5) {
 						// optional measures set
@@ -324,7 +337,8 @@ function($, qlik, moments, vis) {
 						}
 					} else {
 						dataItem.title = dateFromQlikNumber(e[2].qNum);						
-					}					
+					}
+//console.log(dataItem);					
 					return dataItem;
 				});
 //console.log(dataSet);

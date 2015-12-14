@@ -33,5 +33,6 @@ Additional Properties:
 6. Weekend Days     : choose local weekend days (default: Saturday-Sunday), press F5 after change and save
 7. Reverse Color    : reverse Qlik Sense diverging color (red-to-blue)
 8. Apply CSS for Background : apply CSS class to background items (default: true)
+9. max. Items to render: maximum items to render (default: 500), a large amount of items (if nothing is selected) needs much time, this limits the amount
 
 ![QlikSense Extension Timeline](Screenshot3.PNG)
