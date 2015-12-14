@@ -9,7 +9,7 @@ var _extName = "bi-irregular-timeline";
 var _extPath = "extensions/" + _extName + "/";
 var _extPathStyles = "/" + _extPath + "styles/";
 
-define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "./scripts/jss.min", "css!./styles/vis.min.css", "css!./styles/style.css"], 
+define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"], 
 function($, qlik, moments, vis) {
 	return {
 		initialProperties: {
@@ -184,7 +184,7 @@ function($, qlik, moments, vis) {
 							ref: "maxItems",
 							type: "integer",
 							label: "max. Items to render",
-							defaultValue: 500
+							defaultValue: 100
 						}
 					}	
 				}
