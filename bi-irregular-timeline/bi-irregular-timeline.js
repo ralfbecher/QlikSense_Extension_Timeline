@@ -64,322 +64,356 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                     settings: {
                         uses: "settings",
                         items: {
-                            axisOrientation: {
-                                ref: "axisOrientation",
-                                type: "string",
-                                component: "dropdown",
-                                label: "Axis Orientation",
-                                options: [{
-                                        value: 'top'
+                            timelineHeader: {
+                                type: "items",
+                                label: "Timeline Params",
+                                items: {
+                                    axisOrientation: {
+                                        ref: "axisOrientation",
+                                        type: "string",
+                                        component: "dropdown",
+                                        label: "Axis Orientation",
+                                        options: [{
+                                                value: 'top'
+                                        }, {
+                                                value: 'bottom'
+                                        }, {
+                                                value: 'both'
+                                        }, {
+                                                value: 'none'
+                                        }
+								    ],
+                                        defaultValue: "bottom"
+                                    },
+                                    itemOrientation: {
+                                        ref: "itemOrientation",
+                                        type: "string",
+                                        component: "dropdown",
+                                        label: "Item Orientation",
+                                        options: [{
+                                                value: 'top'
                                     }, {
-                                        value: 'bottom'
+                                                value: 'bottom'
+                                    }
+								    ],
+                                        defaultValue: "bottom"
+                                    },
+                                    groupSorting: {
+                                        ref: "groupSorting",
+                                        type: "string",
+                                        component: "dropdown",
+                                        label: "Group Sorting",
+                                        options: [{
+                                                value: 'A',
+                                                label: 'Ascending'
                                     }, {
-                                        value: 'both'
+                                                value: 'D',
+                                                label: 'Descending'
+                                    }
+								    ],
+                                        defaultValue: "A"
+                                    },
+                                    localizeDate: {
+                                        ref: "localizeDate",
+                                        type: "string",
+                                        component: "dropdown",
+                                        label: "Localization",
+                                        options: [{
+                                                value: 'af'
                                     }, {
-                                        value: 'none'
+                                                value: 'ar-ma'
+                                    }, {
+                                                value: 'ar-sa'
+                                    }, {
+                                                value: 'ar-tn'
+                                    }, {
+                                                value: 'ar'
+                                    }, {
+                                                value: 'az'
+                                    }, {
+                                                value: 'be'
+                                    },
+                                            {
+                                                value: 'bg'
+                                    }, {
+                                                value: 'bn'
+                                    }, {
+                                                value: 'bo'
+                                    }, {
+                                                value: 'br'
+                                    }, {
+                                                value: 'bs'
+                                    }, {
+                                                value: 'ca'
+                                    }, {
+                                                value: 'cs'
+                                    }, {
+                                                value: 'cv'
+                                    },
+                                            {
+                                                value: 'cy'
+                                    }, {
+                                                value: 'da'
+                                    }, {
+                                                value: 'de-at'
+                                    }, {
+                                                value: 'de'
+                                    }, {
+                                                value: 'el'
+                                    }, {
+                                                value: 'en-au'
+                                    }, {
+                                                value: 'en-ca'
+                                    },
+                                            {
+                                                value: 'en-gb'
+                                    }, {
+                                                value: 'eo'
+                                    }, {
+                                                value: 'es'
+                                    }, {
+                                                value: 'et'
+                                    }, {
+                                                value: 'eu'
+                                    }, {
+                                                value: 'fa'
+                                    }, {
+                                                value: 'fi'
+                                    }, {
+                                                value: 'fo'
+                                    },
+                                            {
+                                                value: 'fr-ca'
+                                    }, {
+                                                value: 'fr'
+                                    }, {
+                                                value: 'fy'
+                                    }, {
+                                                value: 'gl'
+                                    }, {
+                                                value: 'he'
+                                    }, {
+                                                value: 'hi'
+                                    }, {
+                                                value: 'hr'
+                                    }, {
+                                                value: 'hu'
+                                    },
+                                            {
+                                                value: 'hy-am'
+                                    }, {
+                                                value: 'id'
+                                    }, {
+                                                value: 'is'
+                                    }, {
+                                                value: 'it'
+                                    }, {
+                                                value: 'ja'
+                                    }, {
+                                                value: 'jv'
+                                    }, {
+                                                value: 'ka'
+                                    }, {
+                                                value: 'km'
+                                    },
+                                            {
+                                                value: 'ko'
+                                    }, {
+                                                value: 'lb'
+                                    }, {
+                                                value: 'lt'
+                                    }, {
+                                                value: 'lv'
+                                    }, {
+                                                value: 'me'
+                                    }, {
+                                                value: 'mk'
+                                    }, {
+                                                value: 'ml'
+                                    }, {
+                                                value: 'mr'
+                                    },
+                                            {
+                                                value: 'ms-my'
+                                    }, {
+                                                value: 'ms'
+                                    }, {
+                                                value: 'my'
+                                    }, {
+                                                value: 'nb'
+                                    }, {
+                                                value: 'ne'
+                                    }, {
+                                                value: 'nl'
+                                    }, {
+                                                value: 'nn'
+                                    }, {
+                                                value: 'pl'
+                                    },
+                                            {
+                                                value: 'pt-br'
+                                    }, {
+                                                value: 'pt'
+                                    }, {
+                                                value: 'ro'
+                                    }, {
+                                                value: 'ru'
+                                    }, {
+                                                value: 'si'
+                                    }, {
+                                                value: 'sk'
+                                    }, {
+                                                value: 'sl'
+                                    }, {
+                                                value: 'sq'
+                                    },
+                                            {
+                                                value: 'sr-cyrl'
+                                    }, {
+                                                value: 'sr'
+                                    }, {
+                                                value: 'sv'
+                                    }, {
+                                                value: 'ta'
+                                    }, {
+                                                value: 'th'
+                                    }, {
+                                                value: 'tl-ph'
+                                    }, {
+                                                value: 'tr'
+                                    }, {
+                                                value: 'tzl'
+                                    },
+                                            {
+                                                value: 'tzm-latno'
+                                    }, {
+                                                value: 'tzm'
+                                    }, {
+                                                value: 'uk'
+                                    }, {
+                                                value: 'uz'
+                                    }, {
+                                                value: 'vi'
+                                    }, {
+                                                value: 'zh-cn'
+                                    }, {
+                                                value: 'zh-tw'
                                     }
 								],
-                                defaultValue: "bottom"
-                            },
-                            itemOrientation: {
-                                ref: "itemOrientation",
-                                type: "string",
-                                component: "dropdown",
-                                label: "Item Orientation",
-                                options: [{
-                                        value: 'top'
-                                    }, {
-                                        value: 'bottom'
-                                    }
-								],
-                                defaultValue: "bottom"
-                            },
-                            groupSorting: {
-                                ref: "groupSorting",
-                                type: "string",
-                                component: "dropdown",
-                                label: "Group Sorting",
-                                options: [{
-                                        value: 'A',
-                                        label: 'Ascending'
-                                    }, {
-                                        value: 'D',
-                                        label: 'Descending'
-                                    }
-								],
-                                defaultValue: "A"
-                            },
-                            localizeDate: {
-                                ref: "localizeDate",
-                                type: "string",
-                                component: "dropdown",
-                                label: "Localization",
-                                options: [{
-                                        value: 'af'
-                                    }, {
-                                        value: 'ar-ma'
-                                    }, {
-                                        value: 'ar-sa'
-                                    }, {
-                                        value: 'ar-tn'
-                                    }, {
-                                        value: 'ar'
-                                    }, {
-                                        value: 'az'
-                                    }, {
-                                        value: 'be'
+                                        defaultValue: "en-gb"
                                     },
-                                    {
-                                        value: 'bg'
-                                    }, {
-                                        value: 'bn'
-                                    }, {
-                                        value: 'bo'
-                                    }, {
-                                        value: 'br'
-                                    }, {
-                                        value: 'bs'
-                                    }, {
-                                        value: 'ca'
-                                    }, {
-                                        value: 'cs'
-                                    }, {
-                                        value: 'cv'
-                                    },
-                                    {
-                                        value: 'cy'
-                                    }, {
-                                        value: 'da'
-                                    }, {
-                                        value: 'de-at'
-                                    }, {
-                                        value: 'de'
-                                    }, {
-                                        value: 'el'
-                                    }, {
-                                        value: 'en-au'
-                                    }, {
-                                        value: 'en-ca'
-                                    },
-                                    {
-                                        value: 'en-gb'
-                                    }, {
-                                        value: 'eo'
-                                    }, {
-                                        value: 'es'
-                                    }, {
-                                        value: 'et'
-                                    }, {
-                                        value: 'eu'
-                                    }, {
-                                        value: 'fa'
-                                    }, {
-                                        value: 'fi'
-                                    }, {
-                                        value: 'fo'
-                                    },
-                                    {
-                                        value: 'fr-ca'
-                                    }, {
-                                        value: 'fr'
-                                    }, {
-                                        value: 'fy'
-                                    }, {
-                                        value: 'gl'
-                                    }, {
-                                        value: 'he'
-                                    }, {
-                                        value: 'hi'
-                                    }, {
-                                        value: 'hr'
-                                    }, {
-                                        value: 'hu'
-                                    },
-                                    {
-                                        value: 'hy-am'
-                                    }, {
-                                        value: 'id'
-                                    }, {
-                                        value: 'is'
-                                    }, {
-                                        value: 'it'
-                                    }, {
-                                        value: 'ja'
-                                    }, {
-                                        value: 'jv'
-                                    }, {
-                                        value: 'ka'
-                                    }, {
-                                        value: 'km'
-                                    },
-                                    {
-                                        value: 'ko'
-                                    }, {
-                                        value: 'lb'
-                                    }, {
-                                        value: 'lt'
-                                    }, {
-                                        value: 'lv'
-                                    }, {
-                                        value: 'me'
-                                    }, {
-                                        value: 'mk'
-                                    }, {
-                                        value: 'ml'
-                                    }, {
-                                        value: 'mr'
-                                    },
-                                    {
-                                        value: 'ms-my'
-                                    }, {
-                                        value: 'ms'
-                                    }, {
-                                        value: 'my'
-                                    }, {
-                                        value: 'nb'
-                                    }, {
-                                        value: 'ne'
-                                    }, {
-                                        value: 'nl'
-                                    }, {
-                                        value: 'nn'
-                                    }, {
-                                        value: 'pl'
-                                    },
-                                    {
-                                        value: 'pt-br'
-                                    }, {
-                                        value: 'pt'
-                                    }, {
-                                        value: 'ro'
-                                    }, {
-                                        value: 'ru'
-                                    }, {
-                                        value: 'si'
-                                    }, {
-                                        value: 'sk'
-                                    }, {
-                                        value: 'sl'
-                                    }, {
-                                        value: 'sq'
-                                    },
-                                    {
-                                        value: 'sr-cyrl'
-                                    }, {
-                                        value: 'sr'
-                                    }, {
-                                        value: 'sv'
-                                    }, {
-                                        value: 'ta'
-                                    }, {
-                                        value: 'th'
-                                    }, {
-                                        value: 'tl-ph'
-                                    }, {
-                                        value: 'tr'
-                                    }, {
-                                        value: 'tzl'
-                                    },
-                                    {
-                                        value: 'tzm-latno'
-                                    }, {
-                                        value: 'tzm'
-                                    }, {
-                                        value: 'uk'
-                                    }, {
-                                        value: 'uz'
-                                    }, {
-                                        value: 'vi'
-                                    }, {
-                                        value: 'zh-cn'
-                                    }, {
-                                        value: 'zh-tw'
-                                    }
-								],
-                                defaultValue: "en-gb"
-                            },
-                            markWeekend: {
-                                ref: "markWeekend",
-                                type: "boolean",
-                                component: "switch",
-                                label: "Mark Weekend (F5 needed)",
-                                options: [{
-                                    value: true,
-                                    label: "On"
+                                    markWeekend: {
+                                        ref: "markWeekend",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Mark Weekend (F5 needed)",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
 							}, {
-                                    value: false,
-                                    label: "Off"
+                                            value: false,
+                                            label: "Off"
 							}],
-                                defaultValue: true
-                            },
-                            weekendDays: {
-                                ref: "weekendDays",
-                                type: "string",
-                                component: "dropdown",
-                                label: "Weekend Days (F5 needed)",
-                                options: [{
-                                        value: 'satsun',
-                                        label: 'Saturday-Sunday'
+                                        defaultValue: true
+                                    },
+                                    weekendDays: {
+                                        ref: "weekendDays",
+                                        type: "string",
+                                        component: "dropdown",
+                                        label: "Weekend Days (F5 needed)",
+                                        options: [{
+                                                value: 'satsun',
+                                                label: 'Saturday-Sunday'
                                     }, {
-                                        value: 'sun',
-                                        label: 'Sunday'
+                                                value: 'sun',
+                                                label: 'Sunday'
                                     }, {
-                                        value: 'frisat',
-                                        label: 'Friday-Saturday'
+                                                value: 'frisat',
+                                                label: 'Friday-Saturday'
                                     }, {
-                                        value: 'fri',
-                                        label: 'Friday'
+                                                value: 'fri',
+                                                label: 'Friday'
                                     }
 								],
-                                defaultValue: "satsun"
-                            },
-                            reverseColor: {
-                                ref: "reverseColor",
-                                type: "boolean",
-                                component: "switch",
-                                label: "Reverse Color",
-                                options: [{
-                                    value: true,
-                                    label: "On"
+                                        defaultValue: "satsun"
+                                    },
+                                    reverseColor: {
+                                        ref: "reverseColor",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Reverse Color",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
 							}, {
-                                    value: false,
-                                    label: "Off"
+                                            value: false,
+                                            label: "Off"
 							}],
-                                defaultValue: false
-                            },
-                            itemOverflow: {
-                                ref: "itemOverflow",
-                                type: "boolean",
-                                component: "switch",
-                                label: "Title Text Overflow",
-                                options: [{
-                                    value: true,
-                                    label: "On"
+                                        defaultValue: false
+                                    },
+                                    itemOverflow: {
+                                        ref: "itemOverflow",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Title Text Overflow",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
 							}, {
-                                    value: false,
-                                    label: "Off"
+                                            value: false,
+                                            label: "Off"
 							}],
-                                defaultValue: false
-                            },
-                            backgroundCss: {
-                                ref: "backgroundCss",
-                                type: "boolean",
-                                component: "switch",
-                                label: "Apply CSS for Background",
-                                options: [{
-                                    value: true,
-                                    label: "On"
+                                        defaultValue: false
+                                    },
+                                    backgroundCss: {
+                                        ref: "backgroundCss",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Apply CSS for Background",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
 							}, {
-                                    value: false,
-                                    label: "Off"
+                                            value: false,
+                                            label: "Off"
 							}],
-                                defaultValue: true
-                            },
-                            maxItems: {
-                                ref: "maxItems",
-                                type: "integer",
-                                label: "max. Items to render",
-                                defaultValue: 100
+                                        defaultValue: true
+                                    },
+                                    maxItems: {
+                                        ref: "maxItems",
+                                        type: "integer",
+                                        label: "max. Items to render",
+                                        defaultValue: 100
+                                    },
+                                    visibleRangeMin: {
+                                        ref: "visibleRangeMin",
+                                        type: "integer",
+                                        label: "Visible range min.",
+                                        defaultValue: 0,
+                                        expression: "optional"
+                                    },
+                                    visibleRangeMax: {
+                                        ref: "visibleRangeMax",
+                                        type: "integer",
+                                        label: "Visible range max.",
+                                        defaultValue: 0,
+                                        expression: "optional"
+                                    },
+                                    zoomMin: {
+                                        ref: "zoomMin",
+                                        type: "integer",
+                                        label: "Zoom min.",
+                                        defaultValue: 0,
+                                        expression: "optional"
+                                    },
+                                    zoomMax: {
+                                        ref: "zoomMax",
+                                        type: "integer",
+                                        label: "Zoom max.",
+                                        defaultValue: 0,
+                                        expression: "optional"
+                                    }
+                                }
                             }
                         }
                     }
@@ -480,7 +514,15 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                     //console.log(groupNames);
                     var _qMatrix = qData.qMatrix;
                     if (_qMatrix.length > layout.maxItems) {
-                        var _qMatrix = _qMatrix.slice(0, layout.maxItems);
+                        _qMatrix = _qMatrix.slice(0, layout.maxItems);
+                    }
+
+                    if (layout.visibleRangeMin || layout.visibleRangeMax) {
+                        _qMatrix = _qMatrix.filter(function (e) {
+                            //                            return ((!layout.visibleRangeMin || e[2].qNum >= layout.visibleRangeMin) && (!layout.visibleRangeMax || e[2].qNum < layout.visibleRangeMax)) ||
+                            //                                ((!layout.visibleRangeMin || !e[3].qNum || e[3].qNum >= layout.visibleRangeMin) && (!layout.visibleRangeMax || !e[3].qNum || e[3].qNum < layout.visibleRangeMax));
+                            return (!layout.visibleRangeMax || e[2].qNum < layout.visibleRangeMax) || (!layout.visibleRangeMin || !e[3].qNum || e[3].qNum >= layout.visibleRangeMin);
+                        });
                     }
 
                     var dataSet = _qMatrix.map(function (e) {
@@ -545,6 +587,12 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                     });
                     //console.log(dataSet);
 
+                    //                    function customOrder(a, b) {
+                    //                        // order by id
+                    //                        console.log("a", a.start, "b", b.start);
+                    //                        return b.start.getMilliseconds() - a.start.getMilliseconds();
+                    //                    }
+
                     var dataItems = new vis.DataSet(dataSet);
                     var container = document.getElementById(containerId);
                     var options = {
@@ -554,8 +602,14 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                             axis: layout.axisOrientation,
                             item: layout.itemOrientation
                         },
+                        //order: customOrder,
                         groupOrder: 'id'
                     };
+
+                    if (layout.visibleRangeMin && layout.visibleRangeMin != 0) options.min = dateFromQlikNumber(layout.visibleRangeMin);
+                    if (layout.visibleRangeMax && layout.visibleRangeMax != 0) options.max = dateFromQlikNumber(layout.visibleRangeMax);
+                    if (layout.zoomMin && layout.zoomMin > 0) options.zoomMin = layout.zoomMin * 86400000;
+                    if (layout.zoomMax && layout.zoomMax > 0) options.zoomMax = layout.zoomMax * 86400000;
 
                     var timeline = new vis.Timeline(container);
                     timeline.setOptions(options);
