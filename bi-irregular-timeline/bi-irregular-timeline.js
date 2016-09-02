@@ -9,6 +9,7 @@ var _extName = "bi-irregular-timeline";
 var _extPath = "extensions/" + _extName + "/";
 var _extPathStyles = "/" + _extPath + "styles/";
 
+//define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"],
 define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"],
     function ($, qlik, moments, vis) {
         return {
@@ -419,6 +420,9 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                     }
                 }
             },
+            support: {
+                export: true
+            },
             snapshot: {
                 canTakeSnapshot: true
             },
@@ -615,7 +619,7 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                     timeline.setOptions(options);
                     if (useGroups) timeline.setGroups(groups);
                     timeline.setItems(dataItems);
-
+                    console.log(timeline);
                     $("#" + containerId).css('cursor', 'default');
 
                     timeline.on('select', function (properties) {
@@ -627,6 +631,10 @@ define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-lo
                             }
                         }
                     });
+
+                    if (qlik.Promise) {
+                        return qlik.Promise.resolve();
+                    }
                 }
             }
         }
