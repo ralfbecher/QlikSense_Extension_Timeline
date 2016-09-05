@@ -20,12 +20,14 @@ require.config({
     },
     config: {
         moment: {
-            noGlobal: true
+            noGlobal: false
         }
     }
 });
 
-define(["jquery", "qlik", "./scripts/vis-localized", "./scripts/moment-with-locales.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
+var moment = require('moment');
+
+define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"],
     function ($, qlik, vis) {
         return {
             initialProperties: {
