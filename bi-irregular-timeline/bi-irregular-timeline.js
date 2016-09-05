@@ -11,7 +11,17 @@ var _extPathStyles = "/" + _extPath + "styles/";
 
 require.config({
     paths: {
-        momentjs: './scripts/moment-with-locales.min'
+        moment: './scripts/moment-with-locales.min'
+    },
+    shim: {
+        moment: {
+            exports: 'moment'
+        }
+    },
+    config: {
+        moment: {
+            noGlobal: true
+        }
     }
 });
 
