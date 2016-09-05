@@ -10,15 +10,13 @@ var _extPath = "extensions/" + _extName + "/";
 var _extPathStyles = "/" + _extPath + "styles/";
 
 require.config({
-    shim: {
-        "./scripts/vis-localized": {
-            deps: ["./scripts/moment-with-locales.min"]
-        }
+    paths: {
+        momentjs: './scripts/moment-with-locales.min'
     }
-})
+});
 
-define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"],
-    function ($, qlik, moments, vis) {
+define(["jquery", "qlik", "./scripts/vis-localized", "./scripts/moment-with-locales.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
+    function ($, qlik, vis) {
         return {
             initialProperties: {
                 version: 0.2,
