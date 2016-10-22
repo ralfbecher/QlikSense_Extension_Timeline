@@ -403,6 +403,30 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                         label: "max. Items to render",
                                         defaultValue: 100
                                     },
+                                    fitAllInWindow: {
+                                        ref: "fitAllInWindow",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Fit all events in window",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
+							}, {
+                                            value: false,
+                                            label: "Off"
+							}],
+                                        defaultValue: false
+                                    },
+                                    moveToTime: {
+                                        ref: "moveToTime",
+                                        type: "number",
+                                        label: "Move focus to time",
+                                        defaultValue: 0,
+                                        expression: "optional",
+                                        show: function (layout) {
+                                            return layout.fitAllInWindow != 1;
+                                        }
+                                    },
                                     visibleRangeMin: {
                                         ref: "visibleRangeMin",
                                         type: "integer",
@@ -637,6 +661,11 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                     if (useGroups) timeline.setGroups(groups);
                     timeline.setItems(dataItems);
                     console.log(timeline);
+                    if (layout.fitAllInWindow) {
+                        timeline.fit();
+                    } else if (layout.moveToTime && layout.moveToTime != 0) {
+                        timeline.moveTo(dateFromQlikNumber(layout.moveToTime));
+                    }
                     $("#" + containerId).css('cursor', 'default');
 
                     timeline.on('select', function (properties) {

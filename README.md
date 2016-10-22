@@ -33,13 +33,17 @@ Now with proper localization and adjustable weekend:
 7. Reverse Color    : reverse Qlik Sense diverging color (red-to-blue)
 8. Apply CSS for Background : apply CSS class to background items (default: true)
 9. max. Items to render: maximum items to render (default: 100), a large amount of items (if nothing is selected) needs much time, this limits the amount
-^0. max. Items to render: limit data records to display (default: 100)
+10. max. Items to render: limit data records to display (default: 100)
+11. Fit all events in window: zooms out to fit all events into visible window
+12. Move focus to time: move focus to given time (eg. =now(1), default: 0, no focus)
 11. Visible range min.: limit visible date range mininum by numerical Qlik date or expression (default: 0, no min. date)
 12. Visible range max.: limit visible date range maximum by numerical Qlik date or expression (default: 0, no max. date)
 13. Zoom min.: minimum zoom resolution in days, 1/24 = 1 hr (default: 0, no minimum)
 14. Zoom max.: maximum zoom resolution in days, 31 = 1 month (default: 0, no maximum)
 
 ![QlikSense Extension Timeline](Screenshot3.PNG)
+
+![QlikSense Extension Timeline](Screenshot4.PNG)
 
 ## Author
 
