@@ -481,22 +481,17 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                 }
 
                 if (layout.markWeekend) {
-                    var cssFiles = [
-						["stwe", "style.weekend." + layout.weekendDays + ".css"]
-					]
-
-                    // link css files in head
-                    $.each(cssFiles, function (index, value) {
-                        var idPattern = 'styleLinked_' + value[0];
-                        if ($('#' + idPattern).length === 0) {
-                            var lnk = $('<link />').attr({
-                                id: idPattern,
-                                rel: "stylesheet",
-                                href: _extPathStyles + value[1]
-                            });
-                            $("head").append(lnk);
-                        }
-                    });
+                    var _style = 'background:lightgray;color: white;', _days = '';
+                    if (layout.weekendDays === 'fri') {
+                        _days = '.vis-time-axis .vis-grid.vis-friday';
+                    } else if (layout.weekendDays === 'frisat') {
+                        _days = '.vis-time-axis .vis-grid.vis-friday, .vis-time-axis .vis-grid.vis-saturday';
+                    } else if (layout.weekendDays === 'satsun') {
+                        _days = '.vis-time-axis .vis-grid.vis-saturday, .vis-time-axis .vis-grid.vis-sunday';
+                    } else if (layout.weekendDays === 'sun') {
+                        _days = '.vis-time-axis .vis-grid.vis-sunday';
+                    }
+                    $("<style type='text/css'>" + _days + "{" + _style + "}</style>").appendTo("head");
                 }
 
                 var _this = this,
