@@ -18,7 +18,7 @@ Now with proper localization and adjustable weekend:
 
 ## Measures:
 
-1. Measure: title text for hover popup (optional), default title is start date
+1. Measure: title text for hover popup (optional), default title is start date, use ```<br>``` for line breaks
 2. Measure: CSS class name for styling or number 1 to 10 for CSS class color-a to color-j which are configured for Qlik Sense diverging colors (blue-to-red, optional)
 3. Measure: group name to group items in "swim lanes" (optional)
 
@@ -36,10 +36,11 @@ Now with proper localization and adjustable weekend:
 10. max. Items to render: limit data records to display (default: 100)
 11. Fit all events in window: zooms out to fit all events into visible window
 12. Move focus to time: move focus to given time (eg. =now(1), default: 0, no focus)
-11. Visible range min.: limit visible date range mininum by numerical Qlik date or expression (default: 0, no min. date)
-12. Visible range max.: limit visible date range maximum by numerical Qlik date or expression (default: 0, no max. date)
-13. Zoom min.: minimum zoom resolution in days, 1/24 = 1 hr (default: 0, no minimum)
-14. Zoom max.: maximum zoom resolution in days, 31 = 1 month (default: 0, no maximum)
+13. Rolling Mode    : moves timeline so that current time is always centered (default: false) 
+14. Visible range min.: limit visible date range mininum by numerical Qlik date or expression (default: 0, no min. date)
+15. Visible range max.: limit visible date range maximum by numerical Qlik date or expression (default: 0, no max. date)
+16. Zoom min.: minimum zoom resolution in days, 1/24 = 1 hr (default: 0, no minimum)
+17. Zoom max.: maximum zoom resolution in days, 31 = 1 month (default: 0, no maximum)
 
 ![QlikSense Extension Timeline](Screenshot3.PNG)
 

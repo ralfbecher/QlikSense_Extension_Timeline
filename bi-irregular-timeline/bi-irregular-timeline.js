@@ -5,30 +5,12 @@ Tested on Qlik Sense 2.1.1
 irregular.bi takes no responsibility for any code.
 Use at your own risk. 
 */
-var _extName = "bi-irregular-timeline";
-var _extPath = "extensions/" + _extName + "/";
-var _extPathStyles = "/" + _extPath + "styles/";
+var moment = require("moment");
 
-require.config({
-    paths: {
-        moment: './scripts/moment-with-locales.min'
-    },
-    shim: {
-        moment: {
-            exports: 'moment'
-        }
-    },
-    config: {
-        moment: {
-            noGlobal: false
-        }
-    }
-});
-
-var moment = require('moment');
-
-define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css", "css!./styles/style.css"],
+define(["jquery", "qlik", "./scripts/vis.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
     function ($, qlik, vis) {
+        'use strict';
+    
         return {
             initialProperties: {
                 version: 0.2,
@@ -50,23 +32,23 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                         uses: "dimensions",
                         min: 5,
                         max: 5
-                        /*
-                            1. Dimension: Reference ID, numeric (Event ID or else) or String
-                            2. Dimension: Item Content, text
-                            3. Dimension: Start Date
-                            4. Dimension: End Date (optional, null if omitted)
-                            5. Dimension: Type (box (default), point, range, background)
-                        */
+                            /*
+                                1. Dimension: Reference ID, numeric (Event ID or else) or String
+                                2. Dimension: Item Content, text
+                                3. Dimension: Start Date
+                                4. Dimension: End Date (optional, null if omitted)
+                                5. Dimension: Type (box (default), point, range, background)
+                            */
                     },
                     measures: {
                         uses: "measures",
                         min: 0,
                         max: 3
-                        /*
-                            1. Measure: title text for hover popup (optional)
-                            2. Measure: CSS class name for styling or number 1 to 10 for class color-a = "QlikSense dark blue" to color-j = "Qlik Sense dark red" (optional)
-                            3. Measure: group name to group items in swim lanes (optional)						
-                        */
+                            /*
+                                1. Measure: title text for hover popup (optional)
+                                2. Measure: CSS class name for styling or number 1 to 10 for class color-a = "QlikSense dark blue" to color-j = "Qlik Sense dark red" (optional)
+                                3. Measure: group name to group items in swim lanes (optional)						
+                            */
                     },
                     sorting: {
                         uses: "sorting"
@@ -92,13 +74,13 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                         component: "dropdown",
                                         label: "Axis Orientation",
                                         options: [{
-                                            value: 'top'
+                                                value: 'top'
                                         }, {
-                                            value: 'bottom'
+                                                value: 'bottom'
                                         }, {
-                                            value: 'both'
+                                                value: 'both'
                                         }, {
-                                            value: 'none'
+                                                value: 'none'
                                         }
                                         ],
                                         defaultValue: "bottom"
@@ -109,9 +91,9 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                         component: "dropdown",
                                         label: "Item Orientation",
                                         options: [{
-                                            value: 'top'
+                                                value: 'top'
                                         }, {
-                                            value: 'bottom'
+                                                value: 'bottom'
                                         }
                                         ],
                                         defaultValue: "bottom"
@@ -122,11 +104,11 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                         component: "dropdown",
                                         label: "Group Sorting",
                                         options: [{
-                                            value: 'A',
-                                            label: 'Ascending'
+                                                value: 'A',
+                                                label: 'Ascending'
                                         }, {
-                                            value: 'D',
-                                            label: 'Descending'
+                                                value: 'D',
+                                                label: 'Descending'
                                         }
                                         ],
                                         defaultValue: "A"
@@ -137,185 +119,185 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                         component: "dropdown",
                                         label: "Localization",
                                         options: [{
-                                            value: 'af'
+                                                value: 'af'
                                         }, {
-                                            value: 'ar-ma'
+                                                value: 'ar-ma'
                                         }, {
-                                            value: 'ar-sa'
+                                                value: 'ar-sa'
                                         }, {
-                                            value: 'ar-tn'
+                                                value: 'ar-tn'
                                         }, {
-                                            value: 'ar'
+                                                value: 'ar'
                                         }, {
-                                            value: 'az'
+                                                value: 'az'
                                         }, {
-                                            value: 'be'
+                                                value: 'be'
                                         },
-                                        {
-                                            value: 'bg'
+                                            {
+                                                value: 'bg'
                                         }, {
-                                            value: 'bn'
+                                                value: 'bn'
                                         }, {
-                                            value: 'bo'
+                                                value: 'bo'
                                         }, {
-                                            value: 'br'
+                                                value: 'br'
                                         }, {
-                                            value: 'bs'
+                                                value: 'bs'
                                         }, {
-                                            value: 'ca'
+                                                value: 'ca'
                                         }, {
-                                            value: 'cs'
+                                                value: 'cs'
                                         }, {
-                                            value: 'cv'
+                                                value: 'cv'
                                         },
-                                        {
-                                            value: 'cy'
+                                            {
+                                                value: 'cy'
                                         }, {
-                                            value: 'da'
+                                                value: 'da'
                                         }, {
-                                            value: 'de-at'
+                                                value: 'de-at'
                                         }, {
-                                            value: 'de'
+                                                value: 'de'
                                         }, {
-                                            value: 'el'
+                                                value: 'el'
                                         }, {
-                                            value: 'en-au'
+                                                value: 'en-au'
                                         }, {
-                                            value: 'en-ca'
+                                                value: 'en-ca'
                                         },
-                                        {
-                                            value: 'en-gb'
+                                            {
+                                                value: 'en-gb'
                                         }, {
-                                            value: 'eo'
+                                                value: 'eo'
                                         }, {
-                                            value: 'es'
+                                                value: 'es'
                                         }, {
-                                            value: 'et'
+                                                value: 'et'
                                         }, {
-                                            value: 'eu'
+                                                value: 'eu'
                                         }, {
-                                            value: 'fa'
+                                                value: 'fa'
                                         }, {
-                                            value: 'fi'
+                                                value: 'fi'
                                         }, {
-                                            value: 'fo'
+                                                value: 'fo'
                                         },
-                                        {
-                                            value: 'fr-ca'
+                                            {
+                                                value: 'fr-ca'
                                         }, {
-                                            value: 'fr'
+                                                value: 'fr'
                                         }, {
-                                            value: 'fy'
+                                                value: 'fy'
                                         }, {
-                                            value: 'gl'
+                                                value: 'gl'
                                         }, {
-                                            value: 'he'
+                                                value: 'he'
                                         }, {
-                                            value: 'hi'
+                                                value: 'hi'
                                         }, {
-                                            value: 'hr'
+                                                value: 'hr'
                                         }, {
-                                            value: 'hu'
+                                                value: 'hu'
                                         },
-                                        {
-                                            value: 'hy-am'
+                                            {
+                                                value: 'hy-am'
                                         }, {
-                                            value: 'id'
+                                                value: 'id'
                                         }, {
-                                            value: 'is'
+                                                value: 'is'
                                         }, {
-                                            value: 'it'
+                                                value: 'it'
                                         }, {
-                                            value: 'ja'
+                                                value: 'ja'
                                         }, {
-                                            value: 'jv'
+                                                value: 'jv'
                                         }, {
-                                            value: 'ka'
+                                                value: 'ka'
                                         }, {
-                                            value: 'km'
+                                                value: 'km'
                                         },
-                                        {
-                                            value: 'ko'
+                                            {
+                                                value: 'ko'
                                         }, {
-                                            value: 'lb'
+                                                value: 'lb'
                                         }, {
-                                            value: 'lt'
+                                                value: 'lt'
                                         }, {
-                                            value: 'lv'
+                                                value: 'lv'
                                         }, {
-                                            value: 'me'
+                                                value: 'me'
                                         }, {
-                                            value: 'mk'
+                                                value: 'mk'
                                         }, {
-                                            value: 'ml'
+                                                value: 'ml'
                                         }, {
-                                            value: 'mr'
+                                                value: 'mr'
                                         },
-                                        {
-                                            value: 'ms-my'
+                                            {
+                                                value: 'ms-my'
                                         }, {
-                                            value: 'ms'
+                                                value: 'ms'
                                         }, {
-                                            value: 'my'
+                                                value: 'my'
                                         }, {
-                                            value: 'nb'
+                                                value: 'nb'
                                         }, {
-                                            value: 'ne'
+                                                value: 'ne'
                                         }, {
-                                            value: 'nl'
+                                                value: 'nl'
                                         }, {
-                                            value: 'nn'
+                                                value: 'nn'
                                         }, {
-                                            value: 'pl'
+                                                value: 'pl'
                                         },
-                                        {
-                                            value: 'pt-br'
+                                            {
+                                                value: 'pt-br'
                                         }, {
-                                            value: 'pt'
+                                                value: 'pt'
                                         }, {
-                                            value: 'ro'
+                                                value: 'ro'
                                         }, {
-                                            value: 'ru'
+                                                value: 'ru'
                                         }, {
-                                            value: 'si'
+                                                value: 'si'
                                         }, {
-                                            value: 'sk'
+                                                value: 'sk'
                                         }, {
-                                            value: 'sl'
+                                                value: 'sl'
                                         }, {
-                                            value: 'sq'
+                                                value: 'sq'
                                         },
-                                        {
-                                            value: 'sr-cyrl'
+                                            {
+                                                value: 'sr-cyrl'
                                         }, {
-                                            value: 'sr'
+                                                value: 'sr'
                                         }, {
-                                            value: 'sv'
+                                                value: 'sv'
                                         }, {
-                                            value: 'ta'
+                                                value: 'ta'
                                         }, {
-                                            value: 'th'
+                                                value: 'th'
                                         }, {
-                                            value: 'tl-ph'
+                                                value: 'tl-ph'
                                         }, {
-                                            value: 'tr'
+                                                value: 'tr'
                                         }, {
-                                            value: 'tzl'
+                                                value: 'tzl'
                                         },
-                                        {
-                                            value: 'tzm-latno'
+                                            {
+                                                value: 'tzm-latno'
                                         }, {
-                                            value: 'tzm'
+                                                value: 'tzm'
                                         }, {
-                                            value: 'uk'
+                                                value: 'uk'
                                         }, {
-                                            value: 'uz'
+                                                value: 'uz'
                                         }, {
-                                            value: 'vi'
+                                                value: 'vi'
                                         }, {
-                                            value: 'zh-cn'
+                                                value: 'zh-cn'
                                         }, {
-                                            value: 'zh-tw'
+                                                value: 'zh-tw'
                                         }
                                         ],
                                         defaultValue: "en-gb"
@@ -340,17 +322,17 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                         component: "dropdown",
                                         label: "Weekend Days (F5 needed)",
                                         options: [{
-                                            value: 'satsun',
-                                            label: 'Saturday-Sunday'
+                                                value: 'satsun',
+                                                label: 'Saturday-Sunday'
                                         }, {
-                                            value: 'sun',
-                                            label: 'Sunday'
+                                                value: 'sun',
+                                                label: 'Sunday'
                                         }, {
-                                            value: 'frisat',
-                                            label: 'Friday-Saturday'
+                                                value: 'frisat',
+                                                label: 'Friday-Saturday'
                                         }, {
-                                            value: 'fri',
-                                            label: 'Friday'
+                                                value: 'fri',
+                                                label: 'Friday'
                                         }
                                         ],
                                         defaultValue: "satsun"
@@ -427,16 +409,30 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                                             return layout.fitAllInWindow != 1;
                                         }
                                     },
+                                    rollingMode: {
+                                        ref: "rollingMode",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Rolling Mode",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
+                                        }, {
+                                            value: false,
+                                            label: "Off"
+                                        }],
+                                        defaultValue: false
+                                    },
                                     visibleRangeMin: {
                                         ref: "visibleRangeMin",
-                                        type: "integer",
+                                        type: "number",
                                         label: "Visible range min.",
                                         defaultValue: 0,
                                         expression: "optional"
                                     },
                                     visibleRangeMax: {
                                         ref: "visibleRangeMax",
-                                        type: "integer",
+                                        type: "number",
                                         label: "Visible range max.",
                                         defaultValue: 0,
                                         expression: "optional"
@@ -467,9 +463,7 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
             snapshot: {
                 canTakeSnapshot: true
             },
-
             paint: function ($element, layout) {
-
                 if (layout.itemOverflow) {
                     $("<style>")
                         .prop("type", "text/css")
@@ -481,7 +475,8 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                 }
 
                 if (layout.markWeekend) {
-                    var _style = 'background:lightgray;color: white;', _days = '';
+                    var _style = 'background:lightgray;color: white;',
+                        _days = '';
                     if (layout.weekendDays === 'fri') {
                         _days = '.vis-time-axis .vis-grid.vis-friday';
                     } else if (layout.weekendDays === 'frisat') {
@@ -496,7 +491,7 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
 
                 var _this = this,
                     //app = qlik.currApp();
-                qData = layout.qHyperCube.qDataPages[0],
+                    qData = layout.qHyperCube.qDataPages[0],
                     id = layout.qInfo.qId,
                     containerId = 'timeline-container_' + id,
                     groupNames = [],
@@ -642,7 +637,8 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                             item: layout.itemOrientation
                         },
                         //order: customOrder,
-                        groupOrder: 'id'
+                        groupOrder: 'id',
+                        rollingMode: layout.rollingMode
                     };
 
                     if (layout.visibleRangeMin && layout.visibleRangeMin != 0) options.min = dateFromQlikNumber(layout.visibleRangeMin);
@@ -664,18 +660,16 @@ define(["jquery", "qlik", "./scripts/vis-localized", "css!./styles/vis.min.css",
                     $("#" + containerId).css('cursor', 'default');
 
                     timeline.on('select', function (properties) {
-                        //console.log(properties);
-                        if (properties.hasOwnProperty("items")) {
-                            if (properties.items.length > 0) {
-                                //Make the selections
-                                _this.backendApi.selectValues(0, [properties.items[0]], false);
+                        if (qlik.navigation.getMode() === "analysis") {
+                            //console.log(properties);
+                            if (properties.hasOwnProperty("items")) {
+                                if (properties.items.length > 0) {
+                                    //Make the selections
+                                    _this.backendApi.selectValues(0, [properties.items[0]], true);
+                                }
                             }
                         }
                     });
-
-                    if (qlik.Promise) {
-                        return qlik.Promise;
-                    }
                 }
             }
         }
