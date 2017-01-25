@@ -5,9 +5,9 @@ Tested on Qlik Sense 2.1.1
 irregular.bi takes no responsibility for any code.
 Use at your own risk. 
 */
-var moment = require("moment");
 
-define(["jquery", "qlik", "./scripts/vis.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
+//loads a fixed vis.js, see: https://github.com/almende/vis/issues/2628
+define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
     function ($, qlik, vis) {
         'use strict';
     
