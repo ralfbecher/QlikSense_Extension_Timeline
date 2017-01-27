@@ -566,7 +566,7 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                             content: e[1].qText,
                             start: dateFromQlikNumber(e[2].qNum)
                         };
-                        if (isTextCellNotEmpty(e[3]) && e[3].qNum) {
+                        if (isTextCellNotEmpty(e[3])) {
                             // optional end date set
                             dataItem.end = dateFromQlikNumber(e[3].qNum);
                         }
@@ -585,7 +585,9 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                                 dataItem.title = "-";
                             }
                             if (e.length > 6) {
-                                if (e[6].qNum) {
+                                if (isNaN(e[6].qNum)) {
+                                    dataItem.className = e[6].qText;
+                                } else {
                                     if (layout.reverseColor) {
                                         if (dataItem.type == "background") {
                                             if (layout.backgroundCss) {
@@ -603,8 +605,6 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                                             dataItem.className = "color-" + String.fromCharCode(96 + Math.max(1, Math.min(10, e[6].qNum)));
                                         }
                                     }
-                                } else {
-                                    dataItem.className = e[6].qText;
                                 }
                                 if (useGroups && e.length > 7) {
                                     if (isTextCellNotEmpty(e[7])) {
