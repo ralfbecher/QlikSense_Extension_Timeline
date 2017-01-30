@@ -631,6 +631,7 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                     var container = document.getElementById(containerId);
                     var options = {
                         editable: false,
+                        height: $element.height(),
                         locale: layout.localizeDate,
                         orientation: {
                             axis: layout.axisOrientation,
