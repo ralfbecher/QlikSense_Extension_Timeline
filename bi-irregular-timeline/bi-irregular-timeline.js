@@ -98,6 +98,20 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                                         ],
                                         defaultValue: "bottom"
                                     },
+                                    stackItems: {
+                                        ref: "stackItems",
+                                        type: "boolean",
+                                        component: "switch",
+                                        label: "Stack Items",
+                                        options: [{
+                                            value: true,
+                                            label: "On"
+                                        }, {
+                                            value: false,
+                                            label: "Off"
+                                        }],
+                                        defaultValue: true
+                                    },
                                     groupSorting: {
                                         ref: "groupSorting",
                                         type: "string",
@@ -637,6 +651,7 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                             axis: layout.axisOrientation,
                             item: layout.itemOrientation
                         },
+                        stack: layout.stackItems,
                         //order: customOrder,
                         groupOrder: 'id',
                         rollingMode: layout.rollingMode
