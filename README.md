@@ -28,22 +28,23 @@ Now with proper localization and adjustable weekend:
 
 1. Axis Orientation: top, bottom (default), both, none
 2. Item orientation: top, bottom (default)
-3. Stack Items     : stack items on top of each other such that they do not overlap (default: true)
-4. Group Sorting   : Ascending, Descending
-5. Localization    : choose local for localized date and timestamp formatting (default: en-gb)
-6. Mark Weekend    : apply CSS class for background color of weekend (when zoomed-in), press F5 after change and save (default:true)
-7. Weekend Days    : choose local weekend days (default: Saturday-Sunday), press F5 after change and save
-8. Reverse Color   : reverse Qlik Sense diverging color (red-to-blue)
-9. Apply CSS for Background : apply CSS class to background items (default: true)
-10. max. Items to render: maximum items to render (default: 100), a large amount of items (if nothing is selected) needs much time, this limits the amount
-11. max. Items to render: limit data records to display (default: 100)
-12. Fit all events in window: zooms out to fit all events into visible window
-13. Move focus to time: move focus to given time (eg. =now(1), default: 0, no focus)
-14. Rolling Mode    : moves timeline so that current time is always centered (default: false) 
-15. Visible range min.: limit visible date range mininum by numerical Qlik date or expression (default: 0, no min. date)
-16. Visible range max.: limit visible date range maximum by numerical Qlik date or expression (default: 0, no max. date)
-17. Zoom min.: minimum zoom resolution in days, 1/24 = 1 hr (default: 0, no minimum)
-18. Zoom max.: maximum zoom resolution in days, 31 = 1 month (default: 0, no maximum)
+3. Stack Items: stack items on top of each other such that they do not overlap (default: true)
+4. Item Sorting: sort by start date/time or reference ID if items are stacked (default: none), should not be used with big amounts of items
+5. Group Sorting: Ascending, Descending
+6. Localization: choose local for localized date and timestamp formatting (default: en-gb)
+7. Mark Weekend: apply CSS class for background color of weekend (when zoomed-in), press F5 after change and save (default:true)
+8. Weekend Days: choose local weekend days (default: Saturday-Sunday), press F5 after change and save
+9. Reverse Color: reverse Qlik Sense diverging color (red-to-blue)
+10. Apply CSS for Background : apply CSS class to background items (default: true)
+11. max. Items to render: maximum items to render (default: 100), a large amount of items (if nothing is selected) needs much time, this limits the amount
+12. max. Items to render: limit data records to display (default: 100)
+13. Fit all events in window: zooms out to fit all events into visible window
+14. Move focus to time: move focus to given time (eg. =now(1), default: 0, no focus)
+15. Rolling Mode    : moves timeline so that current time is always centered (default: false) 
+16. Visible range min.: limit visible date range mininum by numerical Qlik date or expression (default: 0, no min. date)
+17. Visible range max.: limit visible date range maximum by numerical Qlik date or expression (default: 0, no max. date)
+18. Zoom min.: minimum zoom resolution in days, 1/24 = 1 hr (default: 0, no minimum)
+19. Zoom max.: maximum zoom resolution in days, 31 = 1 month (default: 0, no maximum)
 
 ## Author
 

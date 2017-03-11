@@ -5,12 +5,10 @@ Tested on Qlik Sense 2.1.1
 irregular.bi takes no responsibility for any code.
 Use at your own risk. 
 */
-
-//loads a fixed vis.js, see: https://github.com/almende/vis/issues/2628
-define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
-    function ($, qlik, vis) {
+define(["jquery", "qlik", "./scripts/moment-with-locales.min", "./scripts/vis-custom.min", "css!./styles/vis.min.css", "css!./styles/style.css"],
+    function ($, qlik, moment, vis) {
         'use strict';
-    
+
         return {
             initialProperties: {
                 version: 0.2,
@@ -111,6 +109,28 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                                             label: "Off"
                                         }],
                                         defaultValue: true
+                                    },
+                                    itemSorting: {
+                                        ref: "itemSorting",
+                                        type: "string",
+                                        component: "dropdown",
+                                        label: "Item Sorting",
+                                        options: [{
+                                                value: 'start',
+                                                label: 'by Start Date/Time'
+                                        }, {
+                                                value: 'id',
+                                                label: 'by Reference ID'
+                                        }, {
+                                                value: 'none',
+                                                label: 'none'
+                                        }
+                                        ],
+                                        defaultValue: "none",
+                                        show: function (layout) {
+                                            return layout.stackItems;
+                                        }
+
                                     },
                                     groupSorting: {
                                         ref: "groupSorting",
@@ -478,18 +498,37 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                 canTakeSnapshot: true
             },
             paint: function ($element, layout) {
+
+                moment.locale(layout.localizeDate);
+
+                var _this = this,
+                    //app = qlik.currApp();
+                    qData = layout.qHyperCube.qDataPages[0],
+                    id = layout.qInfo.qId,
+                    containerId = 'timeline-container-' + id,
+                    cssOverflowId = containerId + '-overflow',
+                    cssWeekendId = containerId + '-weekend',
+                    groupNames = [],
+                    groups = {},
+                    useGroups = false;
+
                 if (layout.itemOverflow) {
-                    $("<style>")
-                        .prop("type", "text/css")
-                        .html("\
-					.vis-item .vis-item-overflow {\
-						overflow: visible;\
-					}")
-                        .appendTo("head");
+                    var cssOverflow = "#" + containerId + " .vis-item .vis-item-overflow { overflow:visible; }";
+                    var cssOverflowElem = $('#' + cssOverflowId);
+                    if (cssOverflowElem.length === 0) {
+                        $("<style  type='text/css' id='" + cssOverflowId + "'></style>")
+                            .html(cssOverflow)
+                            .appendTo("head");
+                    } else {
+                        cssOverflowElem.html(cssOverflow);
+                    }
+                } else {
+                    $('#' + cssOverflowId).remove();
                 }
 
                 if (layout.markWeekend) {
-                    var _style = 'background:lightgray;color: white;',
+                    var cssOverflowElem = $('#' + cssWeekendId);
+                    var _style = 'background:lightgray;color:white;',
                         _days = '';
                     if (layout.weekendDays === 'fri') {
                         _days = '.vis-time-axis .vis-grid.vis-friday';
@@ -500,17 +539,17 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                     } else if (layout.weekendDays === 'sun') {
                         _days = '.vis-time-axis .vis-grid.vis-sunday';
                     }
-                    $("<style type='text/css'>" + _days + "{" + _style + "}</style>").appendTo("head");
+                    var cssWeekend = "#" + containerId + " " + _days + "{" + _style + "}";
+                    if (cssOverflowElem.length === 0) {
+                        $("<style type='text/css' id='" + cssWeekendId + "'></style>")
+                            .html(cssWeekend)
+                            .appendTo("head");
+                    } else {
+                        cssOverflowElem.html(cssWeekend);
+                    }
+                } else {
+                    $('#' + cssWeekendId).remove();
                 }
-
-                var _this = this,
-                    //app = qlik.currApp();
-                    qData = layout.qHyperCube.qDataPages[0],
-                    id = layout.qInfo.qId,
-                    containerId = 'timeline-container_' + id,
-                    groupNames = [],
-                    groups = {},
-                    useGroups = false;
 
                 if (qData && qData.qMatrix) {
 
@@ -580,7 +619,7 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                             content: e[1].qText,
                             start: dateFromQlikNumber(e[2].qNum)
                         };
-                        if (isTextCellNotEmpty(e[3])) {
+                        if (!isNaN(e[3].qNum)) {
                             // optional end date set
                             dataItem.end = dateFromQlikNumber(e[3].qNum);
                         }
@@ -635,32 +674,62 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                     });
                     //console.log(dataSet);
 
-                    //                    function customOrder(a, b) {
-                    //                        // order by id
-                    //                        console.log("a", a.start, "b", b.start);
-                    //                        return b.start.getMilliseconds() - a.start.getMilliseconds();
-                    //                    }
-
                     var dataItems = new vis.DataSet(dataSet);
                     var container = document.getElementById(containerId);
+
+                    var locales = {};
+
+                    ['af', 'ar-ma', 'ar-sa', 'ar-tn', 'ar', 'az', 'be', 'bg', 'bn', 'bo', 'br', 'bs', 'ca', 'cs', 'cv', 'cy',
+                    'da', 'de-at', 'de', 'el', 'en-au', 'en-ca',
+                    'en-gb', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-ca', 'fr', 'fy', 'gl', 'he', 'hi', 'hr', 'hu',
+                    'hy-am', 'id', 'is', 'it', 'ja', 'jv', 'ka', 'km', 'ko', 'lb', 'lt', 'lv', 'me', 'mk', 'ml', 'mr',
+                    'ms-my', 'ms', 'my', 'nb', 'ne', 'nl', 'nn', 'pl',
+                    'pt-br', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr-cyrl', 'sr', 'sv', 'ta', 'th', 'tl-ph', 'tr',
+                    'tzl', 'tzm-latno', 'tzm', 'uk', 'uz', 'vi', 'zh-cn', 'zh-tw']
+                    .forEach(function (e) {
+                        locales[e] = {
+                            current: 'current',
+                            time: 'time'
+                        };
+                    });
+
+                    // issue when more than a couple of hundreds of items
+                    function customOrderStart(a, b) {
+                        return a.start.getMilliseconds() - b.start.getMilliseconds();
+                    }
+                    function customOrderId(a, b) {
+                        return a.id < b.id;
+                    }
+
                     var options = {
                         editable: false,
                         height: $element.height(),
+                        //verticalScroll: true,
+                        //zoomKey: 'ctrlKey',
                         locale: layout.localizeDate,
                         orientation: {
                             axis: layout.axisOrientation,
                             item: layout.itemOrientation
                         },
                         stack: layout.stackItems,
-                        //order: customOrder,
                         groupOrder: 'id',
-                        rollingMode: layout.rollingMode
+                        rollingMode: layout.rollingMode,
+                        locales: locales
                     };
+                    if (layout.stackItems) {
+                        if (layout.itemSorting === "start") {
+                            options.order = customOrderStart;
+                        } else if (layout.itemSorting === "id") {
+                            options.order = customOrderId;
+                        }
+                    }
 
-                    if (layout.visibleRangeMin && layout.visibleRangeMin != 0) options.min = dateFromQlikNumber(layout.visibleRangeMin);
-                    if (layout.visibleRangeMax && layout.visibleRangeMax != 0) options.max = dateFromQlikNumber(layout.visibleRangeMax);
-                    if (layout.zoomMin && layout.zoomMin > 0) options.zoomMin = layout.zoomMin * 86400000;
-                    if (layout.zoomMax && layout.zoomMax > 0) options.zoomMax = layout.zoomMax * 86400000;
+                    if (layout.visibleRangeMin !== 0) options.min = dateFromQlikNumber(layout.visibleRangeMin);
+                    if (layout.visibleRangeMax !== 0) options.max = dateFromQlikNumber(layout.visibleRangeMax);
+                    if (layout.zoomMin > 0) options.zoomMin = layout.zoomMin * 86400000;
+                    if (layout.zoomMax > 0) options.zoomMax = layout.zoomMax * 86400000;
+
+                    //console.log("options",options);
 
                     var timeline = new vis.Timeline(container);
 
@@ -680,7 +749,7 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                             //console.log(properties);
                             if (properties.hasOwnProperty("items")) {
                                 if (properties.items.length > 0) {
-                                    //Make the selections
+                                    // Make the selection
                                     _this.backendApi.selectValues(0, [properties.items[0]], true);
                                 }
                             }
@@ -689,6 +758,7 @@ define(["jquery", "qlik", "./scripts/vis-fix2628.min", "css!./styles/vis.min.css
                 }
             }
         }
+
     });
 
 function isTextCellNotEmpty(c) {

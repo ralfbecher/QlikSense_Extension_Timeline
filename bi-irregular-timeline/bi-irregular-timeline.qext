@@ -3,7 +3,7 @@
 	"description" : "Extension implementing Vis.js Timeline",
 	"icon" : "extension",
 	"type" : "visualization",
-	"version": "0.2",
-	"preview" : "Timeline.png",
+	"version": "0.3",
+	"preview" : "Timeline.PNG",
 	"author": "Ralf Becher, irregular.bi"
 }
