@@ -1,0 +1,25 @@
+{
+  "name": "qliksense_extension_timeline",
+  "version": "0.1.0",
+  "description": "Qlik Sense Extension Timeline",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ralfbecher/QlikSense_Extension_Timeline.git"
+  },
+  "keywords": [
+    "Qlik",
+    "Sense",
+    "qlik-sense",
+    "extensions",
+    "visualization-extensions"
+  ],
+  "author": "Ralf Becher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ralfbecher/QlikSense_Extension_Timeline/issues"
+  },
+  "homepage": "https://github.com/ralfbecher/QlikSense_Extension_Timeline#readme"
+}
